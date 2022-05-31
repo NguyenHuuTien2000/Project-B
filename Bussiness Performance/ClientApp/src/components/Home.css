@@ -6,29 +6,14 @@
 .CompanyList {
     margin-left: 10px;
     padding: 0px;
-    max-height: 900px;
-    list-style: none;
+    max-height: 800px;
     float: left;
     width: 200px;
     overflow: scroll;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-
-.CompanyList > li {
-    text-align: center;
-    border: 1px solid black;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-}
-
-.CompanyList > li:hover {
-    border: 2px solid orange;
 }
 
 .LineChart {
-    width: 70%;
-    height: 500px;
+    width: 80%;
+    height: 400px;
     display: inline-block;
 }

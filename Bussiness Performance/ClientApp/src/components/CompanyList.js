@@ -1,27 +1,34 @@
 ﻿import React, { Component } from 'react';
+import { ListGroupItem } from 'reactstrap';
+import ListGroup from 'reactstrap/lib/ListGroup'
+import eventBus from './ultilities/EventBus'
 
 export class CompanyList extends Component {
     static displayName = CompanyList.name;
 
     constructor(props) {
         super(props);
-        this.state = { companyID: [], loading: true };
+        this.state = { companyID: [], loading: true};
     }
 
     componentDidMount() {
         this.getData();
     }
 
-    static renderCompanyList(companyID) {
-        const ids = companyID.map(ID => <li>{ID}</li>);
-        return (<ul className="CompanyList">{ids}</ul>);
+    sendCompanyID(id) {
+        eventBus.dispatch("compSelected", { ID: id });
+        console.log(eventBus);
+    }
+
+    renderCompanyList(companyID) {
+        const ids = companyID.map(ID => <ListGroupItem key={ID} action onClick={() => this.sendCompanyID(ID)}>{ID}</ListGroupItem>);
+        return (<ListGroup className="CompanyList">{ids}</ ListGroup>);
     }
 
     render() {
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
-            : CompanyList.renderCompanyList(this.state.companyID);
-
+            : this.renderCompanyList(this.state.companyID);
         return (
             <div>
                 {contents}
