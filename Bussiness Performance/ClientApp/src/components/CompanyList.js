@@ -1,14 +1,14 @@
 ﻿import React, { Component } from 'react';
 import { ListGroupItem } from 'reactstrap';
-import ListGroup from 'reactstrap/lib/ListGroup'
-import eventBus from './ultilities/EventBus'
+import { ListGroup } from 'reactstrap';
+import eventBus from './ultilities/EventBus';
 
 export class CompanyList extends Component {
     static displayName = CompanyList.name;
 
     constructor(props) {
         super(props);
-        this.state = { companyID: [], loading: true};
+        this.state = { companyID: [], loading: true, tooltipOpen: false};
     }
 
     componentDidMount() {
@@ -17,11 +17,22 @@ export class CompanyList extends Component {
 
     sendCompanyID(id) {
         eventBus.dispatch("compSelected", { ID: id });
-        console.log(eventBus);
     }
 
-    renderCompanyList(companyID) {
-        const ids = companyID.map(ID => <ListGroupItem key={ID} action onClick={() => this.sendCompanyID(ID)}>{ID}</ListGroupItem>);
+    toggle() {
+        this.setState({
+            tooltipOpen: !this.state.tooltipOpen
+        });
+    }
+
+    renderCompanyList(companies) {
+        const ids = companies.map(Company =>
+            <ListGroupItem
+                key={Company.companyID}
+                action onClick={() => this.sendCompanyID(Company.companyID)}>
+                {Company.companyID}
+            </ListGroupItem>
+        );
         return (<ListGroup className="CompanyList">{ids}</ ListGroup>);
     }
 
@@ -37,7 +48,7 @@ export class CompanyList extends Component {
     }
 
     async getData() {
-        const response = await fetch('api/Companies/ID');
+        const response = await fetch('api/Companies/GetCompanies');
         const data = await response.json();
         this.setState({ companyID: data, loading: false });
     }

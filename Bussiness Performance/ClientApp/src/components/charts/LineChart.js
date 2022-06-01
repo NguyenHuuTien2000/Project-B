@@ -27,12 +27,14 @@ export class LineChart extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { bussinessResult: [], loading: true, currComp: "AAA"};
+        this.chartReference = React.createRef();
+        this.state = { bussinessResult: [], loading: true, currComp: "AAA", data: [], label: []};
     }
 
     componentDidMount() {
-        this.getData();
-        eventBus.on("compSelected", (data) => { this.setState({ bussinessResult: [], loading: true, currComp: data.ID }), this.getData() });
+        eventBus.on("compSelected", (data) => {
+            this.setState({ bussinessResult: [], loading: true, currComp: data.ID })
+        });
     }
 
     componentWillUnmount() {
@@ -40,7 +42,7 @@ export class LineChart extends Component {
     }
 
     renderChart(results) {
-        const options = {
+        let options = {
             responsive: true,
             plugins: {
                 legend: {
@@ -53,13 +55,13 @@ export class LineChart extends Component {
             },
         };
 
-        const labels = [];
-        const numList = [];
+        let labels = [];
+        let numList = [];
         for (let result of results) {
             labels.unshift(result.time);
             numList.unshift(result.cost_Of_Goods_Sold);
         }
-        const chartData = {
+        let chartData = {
             labels,
             datasets: [
                 {
@@ -78,7 +80,7 @@ export class LineChart extends Component {
 
     render() {
         let contents = this.state.loading
-            ? <p><em>Loading...</em></p>
+            ? <h4><em>Loading...</em></h4>
             : this.renderChart(this.state.bussinessResult);
 
         return (

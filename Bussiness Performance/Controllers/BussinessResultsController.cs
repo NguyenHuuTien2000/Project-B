@@ -44,6 +44,21 @@ namespace Bussiness_Performance.Controllers
             return list;
         }
 
+        [HttpGet("{id}"), ActionName("Time")]
+        public ActionResult<IEnumerable<string>> GetResultByTime(string id)
+        {
+            List<string> list = new List<string>();
+            foreach (var result in _context.BussinessResult)
+            {
+                if (result.CompanyID == id)
+                {
+                    list.Add(result.Time);
+                }
+            }
+
+            return list;
+        }
+
         // GET: api/BussinessResults/5
         [HttpGet("{id}")]
         public async Task<ActionResult<BussinessResult>> GetBussinessResult(int id)

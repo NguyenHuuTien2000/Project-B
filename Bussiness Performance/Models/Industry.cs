@@ -6,6 +6,8 @@ namespace Bussiness_Performance.Models
     {
         public int IndustryID { get; set; }
 
+        public string Source { get; set; }
+
         [ForeignKey("Company")]
         public string CompanyID { get; set; }
 
