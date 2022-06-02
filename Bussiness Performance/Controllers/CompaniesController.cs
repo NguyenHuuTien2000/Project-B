@@ -37,7 +37,7 @@ namespace Bussiness_Performance.Controllers
         [HttpGet, ActionName("GetCompanies")]
         public async Task<ActionResult<IEnumerable<Company>>> GetCompany()
         {
-            return await _context.Company.Include(c => c.Industry).ToListAsync();
+            return await _context.Company.AsNoTracking().ToListAsync();
         }
 
         // GET: api/Companies/5

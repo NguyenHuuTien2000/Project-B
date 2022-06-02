@@ -8,7 +8,7 @@ export class CompanyList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { companyID: [], loading: true, tooltipOpen: false};
+        this.state = { companies: [], loading: true};
     }
 
     componentDidMount() {
@@ -19,29 +19,35 @@ export class CompanyList extends Component {
         eventBus.dispatch("compSelected", { ID: id });
     }
 
-    toggle() {
-        this.setState({
-            tooltipOpen: !this.state.tooltipOpen
+    handleFilter(event) {
+        const searchWord = event.target.value.toLowerCase();
+        const newFilter = this.state.companies.filter((value) => {
+            return value.companyID.toLowerCase().includes(searchWord);
         });
+        this.setState({ companies: newFilter});
+        console.log(newFilter);
     }
 
-    renderCompanyList(companies) {
-        const ids = companies.map(Company =>
-            <ListGroupItem
-                key={Company.companyID}
-                action onClick={() => this.sendCompanyID(Company.companyID)}>
-                {Company.companyID}
-            </ListGroupItem>
-        );
-        return (<ListGroup className="CompanyList">{ids}</ ListGroup>);
+    renderCompanyList(list) {
+        return (<ListGroup>
+            {list.length !== 0 && list.map(Company =>
+                <ListGroupItem
+                    key={Company.companyID}
+                    action onClick={() => this.sendCompanyID(Company.companyID)}>
+                    {Company.companyID} - {Company.companyName}
+                </ListGroupItem>
+            )}
+        </ ListGroup>);
     }
 
     render() {
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
-            : this.renderCompanyList(this.state.companyID);
+            : this.renderCompanyList(this.state.companies);
+
         return (
-            <div>
+            <div className="CompanyList scrollbar-primary">
+                <input type="text" placeholder='Search for company name or code' onChange={(event) => this.handleFilter(event)}/>
                 {contents}
             </div>
         );
@@ -50,6 +56,6 @@ export class CompanyList extends Component {
     async getData() {
         const response = await fetch('api/Companies/GetCompanies');
         const data = await response.json();
-        this.setState({ companyID: data, loading: false });
+        this.setState({ companies: data, loading: false });
     }
 }

@@ -28,15 +28,16 @@ namespace Bussiness_Performance.Controllers
             return await _context.BussinessResult.ToListAsync();
         }
 
-        // GET: api/BussinessResults/CompID
-        [HttpGet("{id}"), ActionName("CompID")]
+        // GET: api/BussinessResults/byID
+        [HttpGet("{id}"), ActionName("byID")]
         public ActionResult<IEnumerable<BussinessResult>> GetResultByCompany(string id)
         {
             List<BussinessResult> list = new List<BussinessResult>();
             foreach (var result in _context.BussinessResult)
             {
-                if (result.CompanyID == id)
+                if (result.CompanyID == id && (result.Time != null && result.Cost_Of_Goods_Sold != null))
                 {
+                    result.Time = result.Time.Insert(2, " ");
                     list.Add(result);
                 }
             }

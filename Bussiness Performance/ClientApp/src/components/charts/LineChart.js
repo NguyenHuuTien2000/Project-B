@@ -27,13 +27,12 @@ export class LineChart extends Component {
 
     constructor(props) {
         super(props);
-        this.chartReference = React.createRef();
-        this.state = { bussinessResult: [], loading: true, currComp: "AAA", data: [], label: []};
+        this.state = { bussinessResult: [], loading: 0};
     }
 
     componentDidMount() {
         eventBus.on("compSelected", (data) => {
-            this.setState({ bussinessResult: [], loading: true, currComp: data.ID })
+            this.getData(data.ID)
         });
     }
 
@@ -65,7 +64,7 @@ export class LineChart extends Component {
             labels,
             datasets: [
                 {
-                    label: this.state.currComp,
+                    label: results[0].companyID,
                     data: numList,
                     borderColor: 'rgb(255, 99, 132)',
                     backgroundColor: 'rgba(255, 99, 132, 0.5)',
@@ -79,10 +78,19 @@ export class LineChart extends Component {
     }
 
     render() {
-        let contents = this.state.loading
-            ? <h4><em>Loading...</em></h4>
-            : this.renderChart(this.state.bussinessResult);
-
+        let contents;
+        // eslint-disable-next-line default-case
+        switch (this.state.loading) {
+            case 0:
+                contents = <h4>Loading...</h4>;
+                break;
+            case 2:
+                contents = <h4 style="color: red"><em>Cannot find data</em></h4>;
+                break;
+            case 1:
+                contents = this.renderChart(this.state.bussinessResult);
+        }
+        
         return (
             <div className="LineChart">
                 {contents}
@@ -90,9 +98,13 @@ export class LineChart extends Component {
         );
     }
 
-    async getData() {
-        const response = await fetch(`api/BussinessResults/CompID/${this.state.currComp}`);
+    async getData(id) {
+        const response = await fetch(`api/BussinessResults/byID/${id}`);
         const data = await response.json();
-        this.setState({ bussinessResult: data, loading: false });
+        if (Object.keys(data).length === 0 && data.constructor === Object) {
+            this.setState({ loading: 2 });
+            return;
+        }
+        this.setState({ bussinessResult: data, loading: 1 });
     }
 }
