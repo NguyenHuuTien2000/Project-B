@@ -27,12 +27,12 @@ export class LineChart extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { bussinessResult: [], loading: 0};
+        this.state = { results: [], loading: 0, compName: ""};
     }
 
     componentDidMount() {
         eventBus.on("compSelected", (data) => {
-            this.getData(data.ID)
+            this.getData(data.ID, data.Name)
         });
     }
 
@@ -49,7 +49,7 @@ export class LineChart extends Component {
                 },
                 title: {
                     display: true,
-                    text: 'Type of chart here',
+                    text: 'Gross Profit Margin (%)'
                 },
             },
         };
@@ -58,13 +58,15 @@ export class LineChart extends Component {
         let numList = [];
         for (let result of results) {
             labels.unshift(result.time);
-            numList.unshift(result.cost_Of_Goods_Sold);
+            numList.unshift(result.marginGrossProfitMargin);
         }
+        let companyName = `${results[0].companyID} - ${this.state.compName}`
+
         let chartData = {
             labels,
             datasets: [
                 {
-                    label: results[0].companyID,
+                    label: companyName,
                     data: numList,
                     borderColor: 'rgb(255, 99, 132)',
                     backgroundColor: 'rgba(255, 99, 132, 0.5)',
@@ -88,7 +90,7 @@ export class LineChart extends Component {
                 contents = <h4 style="color: red"><em>Cannot find data</em></h4>;
                 break;
             case 1:
-                contents = this.renderChart(this.state.bussinessResult);
+                contents = this.renderChart(this.state.results);
         }
         
         return (
@@ -98,13 +100,13 @@ export class LineChart extends Component {
         );
     }
 
-    async getData(id) {
-        const response = await fetch(`api/BussinessResults/byID/${id}`);
+    async getData(id, name) {
+        const response = await fetch(`api/FinancialIndicators/byID/${id}`);
         const data = await response.json();
         if (Object.keys(data).length === 0 && data.constructor === Object) {
             this.setState({ loading: 2 });
             return;
         }
-        this.setState({ bussinessResult: data, loading: 1 });
+        this.setState({ results: data, loading: 1, compName: name });
     }
 }

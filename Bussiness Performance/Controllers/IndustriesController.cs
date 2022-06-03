@@ -1,12 +1,10 @@
-﻿using System;
+﻿using Bussiness_Performance.Data;
+using Bussiness_Performance.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Bussiness_Performance.Data;
-using Bussiness_Performance.Models;
 
 namespace Bussiness_Performance.Controllers
 {

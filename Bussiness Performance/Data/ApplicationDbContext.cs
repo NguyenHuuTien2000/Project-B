@@ -3,11 +3,6 @@ using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using System.Data.Entity.ModelConfiguration.Conventions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Bussiness_Performance.Data
 {
@@ -23,6 +18,8 @@ namespace Bussiness_Performance.Data
         public DbSet<Company> Company { get; set; }
         public DbSet<Industry> Industry { get; set; }
         public DbSet<BussinessResult> BussinessResult { get; set; }
+        public DbSet<Transaction> Transaction { get; set; }
+        public DbSet<FinancialIndicator> FinancialIndicator { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -36,6 +33,6 @@ namespace Bussiness_Performance.Data
                 .WithOne(r => r.Company);
         }
 
-        
+
     }
 }

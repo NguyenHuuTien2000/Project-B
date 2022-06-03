@@ -16,7 +16,7 @@ namespace Bussiness_Performance.Models
         public double? Diff_Price { get; set; }
         public double? Diff_Percent_Price { get; set; }
         public double? Matching_Volume { get; set; }
-        public double? Matching_Value { get; set; } 
+        public double? Matching_Value { get; set; }
         public double? Put_Through_All_Volume { get; set; }
         public double? Put_Through_All_Value { get; set; }
 

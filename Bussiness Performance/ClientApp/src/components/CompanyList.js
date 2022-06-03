@@ -8,24 +8,23 @@ export class CompanyList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { companies: [], loading: true};
+        this.state = { companies: [], fullList: [], loading: true};
     }
 
     componentDidMount() {
         this.getData();
     }
 
-    sendCompanyID(id) {
-        eventBus.dispatch("compSelected", { ID: id });
+    sendCompanyID(id, name) {
+        eventBus.dispatch("compSelected", { ID: id, Name: name });
     }
 
     handleFilter(event) {
         const searchWord = event.target.value.toLowerCase();
-        const newFilter = this.state.companies.filter((value) => {
-            return value.companyID.toLowerCase().includes(searchWord);
+        const newFilter = this.state.fullList.filter((value) => {
+            return value.companyID.toLowerCase().includes(searchWord) || value.companyName.toLowerCase().includes(searchWord);
         });
         this.setState({ companies: newFilter});
-        console.log(newFilter);
     }
 
     renderCompanyList(list) {
@@ -33,7 +32,7 @@ export class CompanyList extends Component {
             {list.length !== 0 && list.map(Company =>
                 <ListGroupItem
                     key={Company.companyID}
-                    action onClick={() => this.sendCompanyID(Company.companyID)}>
+                    action onClick={() => this.sendCompanyID(Company.companyID, Company.companyName)}>
                     {Company.companyID} - {Company.companyName}
                 </ListGroupItem>
             )}
@@ -56,6 +55,6 @@ export class CompanyList extends Component {
     async getData() {
         const response = await fetch('api/Companies/GetCompanies');
         const data = await response.json();
-        this.setState({ companies: data, loading: false });
+        this.setState({fullList: data, companies: data, loading: false });
     }
 }

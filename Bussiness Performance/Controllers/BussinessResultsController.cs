@@ -1,12 +1,10 @@
-﻿using System;
+﻿using Bussiness_Performance.Data;
+using Bussiness_Performance.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Bussiness_Performance.Data;
-using Bussiness_Performance.Models;
 
 namespace Bussiness_Performance.Controllers
 {
@@ -30,7 +28,7 @@ namespace Bussiness_Performance.Controllers
 
         // GET: api/BussinessResults/byID
         [HttpGet("{id}"), ActionName("byID")]
-        public ActionResult<IEnumerable<BussinessResult>> GetResultByCompany(string id)
+        public IEnumerable<BussinessResult> GetResultByCompany(string id)
         {
             List<BussinessResult> list = new List<BussinessResult>();
             foreach (var result in _context.BussinessResult)
@@ -41,12 +39,12 @@ namespace Bussiness_Performance.Controllers
                     list.Add(result);
                 }
             }
-
             return list;
         }
 
-        [HttpGet("{id}"), ActionName("Time")]
-        public ActionResult<IEnumerable<string>> GetResultByTime(string id)
+        // GET: api/BussinessResults/byTime
+        [HttpGet("{id}"), ActionName("byTime")]
+        public IEnumerable<string> GetResultByTime(string id)
         {
             List<string> list = new List<string>();
             foreach (var result in _context.BussinessResult)

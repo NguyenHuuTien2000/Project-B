@@ -13,7 +13,7 @@ namespace Bussiness_Performance.Models
 
         public string Source { set; get; }
         public string Exchange { set; get; }
-         
+
         [DataType(DataType.Url)]
         public string Link { set; get; }
 
