@@ -33,7 +33,7 @@ namespace Bussiness_Performance.Controllers
             List<BussinessResult> list = new List<BussinessResult>();
             foreach (var result in _context.BussinessResult)
             {
-                if (result.CompanyID == id && (result.Time != null && result.Cost_Of_Goods_Sold != null))
+                if (result.CompanyID == id && result.Time != null )
                 {
                     result.Time = result.Time.Insert(2, " ");
                     list.Add(result);

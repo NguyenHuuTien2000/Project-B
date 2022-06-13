@@ -1,0 +1,20 @@
+.CompanyList {
+    margin-left: 10px;
+    padding: 0px;
+    float: left;
+    width: 300px;
+}
+
+.CompanyList > input {
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 98%;
+    padding-left: 5px;
+}
+
+.CompanyList > ul {
+    margin-top: 10px;
+    overflow-y: scroll;
+    max-height: 800px;
+    cursor: pointer;
+}

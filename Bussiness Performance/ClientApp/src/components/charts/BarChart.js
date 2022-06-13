@@ -1,31 +1,11 @@
-﻿import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-} from 'chart.js';
-
-import { Line } from 'react-chartjs-2';
 import React, { Component } from 'react';
 import eventBus from '../ultilities/EventBus';
-import './LineChart.css';
+import { Bar } from 'react-chartjs-2';
+import './BarChart.css'
+import Chart from 'chart.js/auto';
 
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-);
-
-export class LineChart extends Component {
-    static displayName = LineChart.name;
+export class BarChart extends Component {
+    static displayName = BarChart.name;
 
     constructor(props) {
         super(props);
@@ -51,7 +31,7 @@ export class LineChart extends Component {
                 },
                 title: {
                     display: true,
-                    text: 'Gross Profit Margin (%)'
+                    text: 'Financial Operating Revenue (VND)'
                 },
             },
         };
@@ -60,7 +40,7 @@ export class LineChart extends Component {
         let numList = [];
         for (let result of results) {
             labels.unshift(result.time);
-            numList.unshift(result.marginGrossProfitMargin);
+            numList.unshift(result.financial_Operating_Revenue);
         }
         let companyName = `${results[0].companyID} - ${this.state.compName}`
 
@@ -70,15 +50,15 @@ export class LineChart extends Component {
                 {
                     label: companyName,
                     data: numList,
-                    borderColor: 'rgb(255, 99, 132)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    spanGaps: true,
+                    borderColor: 'rgb(54, 162, 235)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    skipNull: true,
                 },
             ],
         };
 
         return (
-            <Line options={options} data={chartData} />
+            <Bar options={options} data={chartData} />
         );
     }
 
@@ -97,14 +77,14 @@ export class LineChart extends Component {
         }
         
         return (
-            <div className="LineChart">
+            <div className="BarChart">
                 {contents}
             </div>
         );
     }
 
     async getData(id, name) {
-        const response = await fetch(`api/FinancialIndicators/byID/${id}`);
+        const response = await fetch(`api/BussinessResults/byID/${id}`);
         const data = await response.json();
         if (Object.keys(data).length === 0 && data.constructor === Object) {
             this.setState({ loading: 2 });

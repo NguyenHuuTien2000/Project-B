@@ -15,27 +15,5 @@
     border-radius: 10px;
 }
 
-.CompanyList {
-    margin-left: 10px;
-    padding: 0px;
-    float: left;
-    width: 300px;
-}
 
-.CompanyList > input {
-    width: inherit;
-}
-
-.CompanyList > ul {
-    margin-top: 10px;
-    overflow-y: scroll;
-    max-height: 800px;
-    cursor: pointer;
-}
-
-.LineChart {
-    width: 75%;
-    height: 400px;
-    display: inline-block;
-}
 

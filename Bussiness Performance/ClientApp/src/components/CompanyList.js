@@ -2,6 +2,7 @@
 import { ListGroupItem } from 'reactstrap';
 import { ListGroup } from 'reactstrap';
 import eventBus from './ultilities/EventBus';
+import './CompanyList.css';
 
 export class CompanyList extends Component {
     static displayName = CompanyList.name;
