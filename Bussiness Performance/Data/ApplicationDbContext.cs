@@ -32,7 +32,5 @@ namespace Bussiness_Performance.Data
                 .HasMany(c => c.BussinessResult)
                 .WithOne(r => r.Company);
         }
-
-
     }
 }
