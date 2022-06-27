@@ -8,6 +8,8 @@ namespace Bussiness_Performance.Models
         public string Source { get; set; }
 
         public string Trading_Date { get; set; }
+        public double? TotalVolume { get; set; }
+        public double? TotalValue { get; set; }
         public double? Open_Price { get; set; }
         public double? Close_Price { get; set; }
         public double? Highest { get; set; }

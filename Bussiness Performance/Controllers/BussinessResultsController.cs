@@ -42,21 +42,6 @@ namespace Bussiness_Performance.Controllers
             return list;
         }
 
-        [HttpGet("{id}"), ActionName("TotalExpense")]
-        public StatisticObj GetTotalExpense(string id)
-        {
-            StatisticObj statistic = new StatisticObj();
-            foreach (var result in _context.BussinessResult)
-            {
-                if (result.CompanyID == id && result.Time != null)
-                {
-                    result.Time = result.Time.Insert(2, " ");
-                    statistic.totalExpense += result.Financial_Expenses;
-                }
-            }
-            return statistic;
-        }
-
         // GET: api/BussinessResults/byTime
         [HttpGet("{id}"), ActionName("byTime")]
         public IEnumerable<string> GetResultByTime(string id)
