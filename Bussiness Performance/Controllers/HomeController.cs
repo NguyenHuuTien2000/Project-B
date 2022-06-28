@@ -42,9 +42,32 @@ namespace Bussiness_Performance.Controllers
                 TotalRevenue = revenue,
                 TotalExpense = expense,
                 EPS = eps,
-                WorkingCapital = 21322234
+                WorkingCapital = 0
             };
             return statistic;
+        }
+
+        [HttpGet("{id}"), ActionName("BalanceSheetAccounting")]
+        public IEnumerable<BalanceSheetAccounting> GetBalanceSheetAccounting(string id)
+        {
+            
+            List<BalanceSheetAccounting> list = _context.BalanceSheetAccounting
+                .Where(r => r.CompanyID == id)
+                .Where(r => r.Time != null)
+                .ToList();
+            foreach (var result in list)
+            {
+                if (result.Total_Assets == null)
+                {
+                    result.Total_Assets = 0;
+                }
+                if (result.Liabilities == null)
+                {
+                    result.Liabilities = 0;
+                }
+                result.Time = result.Time.Insert(2, " ");
+            }
+            return list;
         }
     }
 }

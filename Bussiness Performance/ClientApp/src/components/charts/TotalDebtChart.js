@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import eventBus from '../ultilities/EventBus';
-import { Bar } from 'react-chartjs-2';
-import Chart from 'chart.js/auto';
+import { Line } from 'react-chartjs-2';
+//import Chart from 'chart.js/auto';
 
-export class OperatingRevenue extends Component {
-    static displayName = OperatingRevenue.name;
+export class TotatDebt extends Component {
+    static displayName = TotatDebt.name;
 
     constructor(props) {
         super(props);
@@ -30,7 +30,7 @@ export class OperatingRevenue extends Component {
                 },
                 title: {
                     display: true,
-                    text: 'Financial Operating Revenue (VND)'
+                    text: 'Total Debt (VND)'
                 },
             },
         };
@@ -39,25 +39,27 @@ export class OperatingRevenue extends Component {
         let numList = [];
         for (let result of results) {
             labels.unshift(result.time);
-            numList.unshift(result.financial_Operating_Revenue);
+            numList.unshift(result.long_Term_Debt + result.short_Term_Debt);
         }
+        
         let companyName = `${results[0].companyID} - ${this.state.compName}`
 
         let chartData = {
             labels,
             datasets: [
                 {
-                    label: 'Financial Operating Revenue (VND)',
+                    label: 'Total Debt',
                     data: numList,
-                    borderColor: 'rgb(54, 162, 235)',
-                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgb(235, 223, 28)',
+                    backgroundColor: 'rgba(235, 223, 28, 1)',
                     skipNull: true,
+                    fill: 'origin'
                 },
             ],
         };
 
         return (
-            <Bar options={options} data={chartData} />
+            <Line options={options} data={chartData} />
         );
     }
 
@@ -75,14 +77,14 @@ export class OperatingRevenue extends Component {
         }
         
         return (
-            <div className="BarChart bg-light rounded m-1 p-2">
+            <div className="TotalDebt bg-light rounded m-1 p-2">
                 {contents}
             </div>
         );
     }
 
     async getData(id, name) {
-        const response = await fetch(`api/BussinessResults/byID/${id}`);
+        const response = await fetch(`api/Home/BalanceSheetAccounting/${id}`);
         const data = await response.json();
         if (Object.keys(data).length === 0 && data.constructor === Object) {
             this.setState({ loading: 2 });

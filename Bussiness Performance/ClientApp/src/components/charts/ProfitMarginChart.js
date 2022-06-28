@@ -68,7 +68,7 @@ export class ProfitMargin extends Component {
             labels,
             datasets: [
                 {
-                    label: companyName,
+                    label: 'Gross Profit Margin (%)',
                     data: numList,
                     borderColor: 'rgb(255, 99, 132)',
                     backgroundColor: 'rgba(255, 99, 132, 0.5)',

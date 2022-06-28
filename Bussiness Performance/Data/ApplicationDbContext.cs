@@ -20,6 +20,7 @@ namespace Bussiness_Performance.Data
         public DbSet<BussinessResult> BussinessResult { get; set; }
         public DbSet<Transaction> Transaction { get; set; }
         public DbSet<FinancialIndicator> FinancialIndicator { get; set; }
+        public DbSet<BalanceSheetAccounting> BalanceSheetAccounting { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

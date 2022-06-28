@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { CompanyList } from './CompanyList';
+//import { CompanyList } from './CompanyList';
 import { ProfitMargin } from './charts/ProfitMarginChart';
 import { OperatingRevenue } from './charts/OperatingRevenueChart';
+import { TotatDebt } from './charts/TotalDebtChart';
 import { Statistic } from './statistics/Statistic';
+import { NetWorth } from './charts/NetWorth';
 import './Home.css';
 
 export class Home extends Component {
@@ -12,7 +14,7 @@ export class Home extends Component {
       return (
       <div className="container-fluid">
         <div className="row mt-2">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
               <div class="position-sticky pt-3">
                 <ul class="nav flex-column">
                   <li class="nav-item">
@@ -51,6 +53,8 @@ export class Home extends Component {
                   <div className="col-md-9">
                       <ProfitMargin />
                       <OperatingRevenue />
+                      <TotatDebt />
+                      <NetWorth />
                   </div>
                   <div className="col-md-3">
                       <Statistic />

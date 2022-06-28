@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import eventBus from '../ultilities/EventBus';
-import { Bar } from 'react-chartjs-2';
-import Chart from 'chart.js/auto';
+// import { Line } from 'react-chartjs-2';
+import { Bubble } from 'react-chartjs-2';
 
-export class OperatingRevenue extends Component {
-    static displayName = OperatingRevenue.name;
+export class NetWorth extends Component {
+    static displayName = NetWorth.name;
 
     constructor(props) {
         super(props);
@@ -30,34 +30,59 @@ export class OperatingRevenue extends Component {
                 },
                 title: {
                     display: true,
-                    text: 'Financial Operating Revenue (VND)'
+                    text: 'Net Worth'
                 },
             },
         };
 
         let labels = [];
-        let numList = [];
+        let assets = [];
+        let liabilities = [];
+        let netWorth = [];
         for (let result of results) {
             labels.unshift(result.time);
-            numList.unshift(result.financial_Operating_Revenue);
+            assets.unshift(result.total_Assets);
+            liabilities.unshift(result.liabilities);
+            netWorth.unshift(result.total_Assets - result.liabilities);
         }
+        console.log(assets);
+        console.log(liabilities);
+        console.log(netWorth);
+        
         let companyName = `${results[0].companyID} - ${this.state.compName}`
 
         let chartData = {
             labels,
             datasets: [
                 {
-                    label: 'Financial Operating Revenue (VND)',
-                    data: numList,
-                    borderColor: 'rgb(54, 162, 235)',
-                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    label: 'Assets',
+                    data: assets,
+                    borderColor: 'rgb(65, 235, 28)',
+                    backgroundColor: 'rgba(65, 235, 28, 0.6)',
                     skipNull: true,
+                    type: 'bar'
+                },
+                {
+                    label: 'Liabilities',
+                    data: liabilities,
+                    borderColor: 'rgb(235, 28, 87)',
+                    backgroundColor: 'rgba(235, 28, 87, 0.8)',
+                    skipNull: true,
+                    type: 'bar'
+                },
+                {
+                    label: 'Net Worth',
+                    data: netWorth,
+                    borderColor: 'rgb(33, 29, 29)',
+                    backgroundColor: 'rgba(33, 29, 29, 0.7)',
+                    skipNull: true,
+                    type: 'line'
                 },
             ],
         };
 
         return (
-            <Bar options={options} data={chartData} />
+            <Bubble options={options} data={chartData} />
         );
     }
 
@@ -75,14 +100,14 @@ export class OperatingRevenue extends Component {
         }
         
         return (
-            <div className="BarChart bg-light rounded m-1 p-2">
+            <div className="NetWorth bg-light rounded m-1 p-2">
                 {contents}
             </div>
         );
     }
 
     async getData(id, name) {
-        const response = await fetch(`api/BussinessResults/byID/${id}`);
+        const response = await fetch(`api/Home/BalanceSheetAccounting/${id}`);
         const data = await response.json();
         if (Object.keys(data).length === 0 && data.constructor === Object) {
             this.setState({ loading: 2 });
