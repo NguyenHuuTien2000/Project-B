@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import eventBus from '../ultilities/EventBus';
 import { Bar } from 'react-chartjs-2';
-import './BarChart.css'
 import Chart from 'chart.js/auto';
 
-export class BarChart extends Component {
-    static displayName = BarChart.name;
+export class OperatingRevenue extends Component {
+    static displayName = OperatingRevenue.name;
 
     constructor(props) {
         super(props);
@@ -67,7 +66,6 @@ export class BarChart extends Component {
         // eslint-disable-next-line default-case
         switch (this.state.loading) {
             case 0:
-                contents = <h4>Loading...</h4>;
                 break;
             case 2:
                 contents = <h4 style="color: red"><em>Cannot find data</em></h4>;
@@ -77,7 +75,7 @@ export class BarChart extends Component {
         }
         
         return (
-            <div className="BarChart">
+            <div className="BarChart bg-light rounded m-1 p-2">
                 {contents}
             </div>
         );

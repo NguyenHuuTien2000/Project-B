@@ -13,7 +13,6 @@ import { Line } from 'react-chartjs-2';
 import React, { Component } from 'react';
 import eventBus from '../ultilities/EventBus';
 
-import './LineChart.css';
 
 ChartJS.register(
     CategoryScale,
@@ -25,8 +24,8 @@ ChartJS.register(
     Legend
 );
 
-export class LineChart extends Component {
-    static displayName = LineChart.name;
+export class ProfitMargin extends Component {
+    static displayName = ProfitMargin.name;
 
     constructor(props) {
         super(props);
@@ -88,7 +87,6 @@ export class LineChart extends Component {
         // eslint-disable-next-line default-case
         switch (this.state.loading) {
             case 0:
-                contents = <h4>Loading...</h4>;
                 break;
             case 2:
                 contents = <h4 style="color: red"><em>Cannot find data</em></h4>;
@@ -98,7 +96,7 @@ export class LineChart extends Component {
         }
         
         return (
-            <div className="LineChart">
+            <div className="LineChart bg-light rounded m-1 p-2">
                 {contents}
             </div>
         );

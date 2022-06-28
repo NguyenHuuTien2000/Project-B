@@ -16,3 +16,24 @@ html {
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
+
+.search-box {
+  position: relative;
+}
+
+.dataResult {
+  position: absolute;
+  margin-top: 5px;
+  width: 365px;
+  height: 200px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
+  overflow-y: auto;
+  right: 810px;
+  top: 20px;
+}
+
+.dataResult::-webkit-scrollbar {
+  display: none;
+}

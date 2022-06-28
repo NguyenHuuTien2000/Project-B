@@ -20,17 +20,21 @@ export class Statistic extends Component {
     }
 
     showData(data) {
-        var stock = <p>data.companyID</p>
+        var formatter = new Intl.NumberFormat('de-De', {
+            style: 'currency',
+            currency: 'VND',
+            maximumFractionDigits: 0
+        });
         return (<div className="bg-light p-3">
             <h4>Profile</ h4>
-            <p>Stock: {data.companyID}</p>
-            <p>Name: {data.companyName}</p>
-            <p>Sector: {data.sector}</p>
-            <p>Industry: {data.industry}</p>
-            <p>Total Revenue: {data.totalRevenue} VND</p>
-            <p>Total data: {data.totalExpense} VND</p>
-            <p>EPS: {data.eSP} VND</p>
-            <p>Working Capital: {data.workingCapital}</p>
+            <p><strong>Stock</strong>:   {data.companyID}</p>
+            <p><strong>Name</strong>:    {data.companyName}</p>
+            <p><strong>Sector</strong>:  {data.sector}</p>
+            <p><strong>Industry</strong>:    {data.industry}</p>
+            <p><strong>Total Revenue</strong>:   {formatter.format(data.totalRevenue)}</p>
+            <p><strong>Total Expense</strong>:  {formatter.format(data.totalExpense)}</p>
+            <p><strong>EPS</strong>: {formatter.format(data.eps)}</p>
+            <p><strong>Working Capital</strong>: {formatter.format(data.workingCapital)}</p>
         </div>);
     } 
 
@@ -39,7 +43,6 @@ export class Statistic extends Component {
         // eslint-disable-next-line default-case
         switch (this.state.loading) {
             case 0:
-                contents = <h4>Loading...</h4>;
                 break;
             case 2:
                 contents = <h4 style="color: red"><em>Cannot find data</em></h4>;
@@ -49,7 +52,7 @@ export class Statistic extends Component {
         }
 
         return (
-            <div className="Statistic w-25">
+            <div className="Statistic">
                 {contents}
             </div>
         );

@@ -28,7 +28,7 @@ namespace Bussiness_Performance.Controllers
             {
                 return null;
             }
-            var revenue = _context.Transaction.Where(c => c.CompanyID == id).Sum(c => c.TotalValue / 1_000_000);
+            var revenue = _context.Transaction.Where(c => c.CompanyID == id).Sum(c => c.TotalValue/1_000);
             var expense = _context.BussinessResult.Where(c => c.CompanyID == id).Sum(c => c.Financial_Expenses);
             var eps = _context.FinancialIndicator.Where(c => c.CompanyID == id).Sum(c => c.EPS);
             
@@ -42,7 +42,7 @@ namespace Bussiness_Performance.Controllers
                 TotalRevenue = revenue,
                 TotalExpense = expense,
                 EPS = eps,
-                WorkingCapital = 0
+                WorkingCapital = 21322234
             };
             return statistic;
         }
