@@ -96,7 +96,7 @@ export class ProfitMargin extends Component {
         }
         
         return (
-            <div className="LineChart bg-light rounded m-1 p-2">
+            <div className="LineChart chart bg-light rounded m-1 p-2">
                 {contents}
             </div>
         );

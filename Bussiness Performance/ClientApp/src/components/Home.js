@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import { CompanyList } from './CompanyList';
+import { CompanyList } from './CompanyList';
 import { ProfitMargin } from './charts/ProfitMarginChart';
 import { OperatingRevenue } from './charts/OperatingRevenueChart';
 import { TotatDebt } from './charts/TotalDebtChart';
@@ -44,6 +44,12 @@ export class Home extends Component {
                       Template 2
                     </a>
                   </li>
+                  <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Companies List</span>
+                    </h6>
+                  <li className='nav-item' id="side-list">
+                    <CompanyList></CompanyList>
+                  </li>
                 </ul>
               </div>
             </nav>
@@ -63,10 +69,10 @@ export class Home extends Component {
                   </div>
                 </div>
                 <div className='row'>
-                  <div className='col-md-6'>
+                  <div className='col-md-6 me-0'>
                     <OperatingRevenue />
                   </div>
-                  <div className='col-md-6'>
+                  <div className='col-md-6 ms-0'>
                     <TotatDebt />
                   </div>
                 </div>

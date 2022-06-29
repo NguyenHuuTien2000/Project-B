@@ -31,10 +31,9 @@ export class Statistic extends Component {
             <p><strong>Name</strong>:    {data.companyName}</p>
             <p><strong>Sector</strong>:  {data.sector}</p>
             <p><strong>Industry</strong>:    {data.industry}</p>
-            <p><strong>Total Revenue</strong>:   {formatter.format(data.totalRevenue)}</p>
-            <p><strong>Total Expense</strong>:  {formatter.format(data.totalExpense)}</p>
+            <p><strong>Total Revenue (B)</strong>:   {formatter.format(data.totalRevenue)}</p>
+            <p><strong>Total Expense (B)</strong>:  {formatter.format(data.totalExpense)}</p>
             <p><strong>EPS</strong>: {formatter.format(data.eps)}</p>
-            <p><strong>Working Capital</strong>: {formatter.format(data.workingCapital)}</p>
         </div>);
     } 
 

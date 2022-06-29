@@ -82,7 +82,7 @@ export class NavMenu extends Component {
                 </div>
                 <div className="navbar-nav">
                     <div className="nav-item text-nowrap" >
-                        <a className="nav-link px-3" onClick={() => this.clearInput}>Clear</a>
+                        <button type='button' className="nav-link px-3" onClick={() => this.clearInput}>Clear</button>
                     </div>
                 </div>
             </header>

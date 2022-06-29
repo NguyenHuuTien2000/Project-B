@@ -75,7 +75,7 @@ export class OperatingRevenue extends Component {
         }
         
         return (
-            <div className="BarChart bg-light rounded m-1 p-2">
+            <div className="BarChart chart bg-light rounded m-1 p-2">
                 {contents}
             </div>
         );

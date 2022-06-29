@@ -28,6 +28,10 @@ namespace Bussiness_Performance.Controllers
             List<FinancialIndicator> list = new List<FinancialIndicator>();
             foreach (var result in _context.FinancialIndicator)
             {
+                if (result.MarginGrossProfitMargin == null)
+                {
+                    result.MarginGrossProfitMargin = 0;
+                }
                 if (result.CompanyID == id && (result.Time != null && result.MarginGrossProfitMargin != null))
                 {
                     result.Time = result.Time.Insert(2, " ");

@@ -31,7 +31,10 @@ namespace Bussiness_Performance.Controllers
             var revenue = _context.Transaction.Where(c => c.CompanyID == id).Sum(c => c.TotalValue/1_000);
             var expense = _context.BussinessResult.Where(c => c.CompanyID == id).Sum(c => c.Financial_Expenses);
             var eps = _context.FinancialIndicator.Where(c => c.CompanyID == id).Sum(c => c.EPS);
-            
+
+            revenue = revenue == null ? 0 : revenue;
+            expense = expense == null ? 0 : expense;
+            eps = eps == null ? 0 : eps;
 
             StatisticList statistic = new StatisticList
             {
@@ -41,8 +44,7 @@ namespace Bussiness_Performance.Controllers
                 Industry = compDetail.Level_2_Industry,
                 TotalRevenue = revenue,
                 TotalExpense = expense,
-                EPS = eps,
-                WorkingCapital = 0
+                EPS = eps
             };
             return statistic;
         }

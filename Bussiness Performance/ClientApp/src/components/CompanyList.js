@@ -20,14 +20,6 @@ export class CompanyList extends Component {
         eventBus.dispatch("compSelected", { ID: id, Name: name });
     }
 
-    handleFilter(event) {
-        const searchWord = event.target.value.toLowerCase();
-        const newFilter = this.state.fullList.filter((value) => {
-            return value.companyID.toLowerCase().includes(searchWord) || value.companyName.toLowerCase().includes(searchWord);
-        });
-        this.setState({ companies: newFilter});
-    }
-
     renderCompanyList(list) {
         return (<ListGroup>
             {list.length !== 0 && list.map(Company =>
@@ -47,7 +39,6 @@ export class CompanyList extends Component {
 
         return (
             <div className="CompanyList scrollbar-primary">
-                <input type="text" placeholder='Search for company name or code' onChange={(event) => this.handleFilter(event)}/>
                 {contents}
             </div>
         );

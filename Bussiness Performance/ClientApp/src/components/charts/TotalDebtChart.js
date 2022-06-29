@@ -77,7 +77,7 @@ export class TotatDebt extends Component {
         }
         
         return (
-            <div className="TotalDebt bg-light rounded m-1 p-2">
+            <div className="TotalDebt chart bg-light rounded m-1 p-2">
                 {contents}
             </div>
         );

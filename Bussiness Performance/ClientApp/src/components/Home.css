@@ -5,6 +5,11 @@
 
 main {
     margin-left: auto;
+    max-width: 100%;
+}
+
+main > div {
+    max-width: 100% !important;
 }
 
 ::-webkit-scrollbar {
@@ -22,6 +27,14 @@ main {
 
 body {
     font-size: .875rem;
+}
+
+/* .chart,canvas {
+    height: 350px !important;
+} */
+
+#side-list li {
+    width: 79%;
 }
 
 .feather {
