@@ -5,12 +5,20 @@ import { OperatingRevenue } from './charts/OperatingRevenueChart';
 import { TotatDebt } from './charts/TotalDebtChart';
 import { Statistic } from './statistics/Statistic';
 import { NetWorth } from './charts/NetWorth';
+import { Template1 } from './Template1';
+import { Template2 } from './Template2';
 import './Home.css';
 
 export class Home extends Component {
   static displayName = Home.name;
+
+  constructor(props) {
+    super(props);
+    this.state = { temp : 1};
+  }
     
   render () {
+      let content = this.state.temp === 1 ? <Template1 /> : <Template2/>
       return (
       <div className="container-fluid">
         <div className="row mt-2">
@@ -33,20 +41,20 @@ export class Home extends Component {
                 </h6>
                 <ul class="nav flex-column mb-2">
                   <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <button class="nav-link">
                       <span data-feather="file-text"></span>
                       Template 1
-                    </a>
+                    </button>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <button class="nav-link" href="#">
                       <span data-feather="file-text"></span>
                       Template 2
-                    </a>
+                    </button>
                   </li>
                   <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                     <span>Companies List</span>
-                    </h6>
+                  </h6>
                   <li className='nav-item' id="side-list">
                     <CompanyList></CompanyList>
                   </li>
