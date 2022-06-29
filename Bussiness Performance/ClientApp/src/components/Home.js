@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { CompanyList } from './CompanyList';
-import { ProfitMargin } from './charts/ProfitMarginChart';
-import { OperatingRevenue } from './charts/OperatingRevenueChart';
-import { TotatDebt } from './charts/TotalDebtChart';
-import { Statistic } from './statistics/Statistic';
-import { NetWorth } from './charts/NetWorth';
+import eventBus from './ultilities/EventBus';
 import { Template1 } from './Template1';
 import { Template2 } from './Template2';
 import './Home.css';
@@ -16,9 +12,18 @@ export class Home extends Component {
     super(props);
     this.state = { temp : 1};
   }
+
+  selectTemplate(num) {
+    this.setState({temp: num});
+  }
+
+  sendCompanyID(id, name) {
+    eventBus.dispatch("compSelected", { ID: id, Name: name });
+}
     
   render () {
       let content = this.state.temp === 1 ? <Template1 /> : <Template2/>
+
       return (
       <div className="container-fluid">
         <div className="row mt-2">
@@ -41,13 +46,13 @@ export class Home extends Component {
                 </h6>
                 <ul class="nav flex-column mb-2">
                   <li class="nav-item">
-                    <button class="nav-link">
+                    <button class="nav-link" className='btn' onClick={() => this.selectTemplate(1)}>
                       <span data-feather="file-text"></span>
                       Template 1
                     </button>
                   </li>
                   <li class="nav-item">
-                    <button class="nav-link" href="#">
+                    <button class="nav-link" className='btn' onClick={() => this.selectTemplate(2)}>
                       <span data-feather="file-text"></span>
                       Template 2
                     </button>
@@ -62,31 +67,8 @@ export class Home extends Component {
               </div>
             </nav>
             <main className='col-md-10 ms-auto col-lg-10'>
-              <div className='container m-0 p-0 w-100'>
-                <div className='row'>
-                  <div className="col-md-9">
-                      <ProfitMargin />
-                  </div>
-                  <div className="col-md-3">
-                      <Statistic />
-                  </div>
-                </div>
-                <div className='row'>
-                  <div className='col-md-12'>
-                      <NetWorth />
-                  </div>
-                </div>
-                <div className='row'>
-                  <div className='col-md-6 me-0'>
-                    <OperatingRevenue />
-                  </div>
-                  <div className='col-md-6 ms-0'>
-                    <TotatDebt />
-                  </div>
-                </div>
-              </div>
+              {content}
             </main>
-            
         </div>
       </div>
     );

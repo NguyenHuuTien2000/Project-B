@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import eventBus from '../ultilities/EventBus';
 import { Line } from 'react-chartjs-2';
 
-export class ROEA extends Component {
-    static displayName = ROEA.name;
+export class PERatio extends Component {
+    static displayName = PERatio.name;
 
     constructor(props) {
         super(props);
@@ -29,18 +29,16 @@ export class ROEA extends Component {
                 },
                 title: {
                     display: true,
-                    text: 'Return on Equility and Return on Assets'
+                    text: 'Price Earning Ratio (%)'
                 },
             },
         };
 
         let labels = [];
-        let roea = [];
-        let roaa = [];
+        let pe = [];
         for (let result of results) {
             labels.unshift(result.time);
-            roea.unshift(result.roea);
-            roaa.unshift(result.roaa);
+            pe.unshift(result.marketPriceToEarningsIndex);
         }
         
         let companyName = `${results[0].companyID} - ${this.state.compName}`
@@ -49,21 +47,13 @@ export class ROEA extends Component {
             labels,
             datasets: [
                 {
-                    label: 'Return on Equity (%)',
-                    data: roea,
-                    borderColor: 'rgb(235, 28, 87)',
-                    backgroundColor: 'rgba(243, 26, 87, 0.8)',
+                    label: 'Price Earning Ratio',
+                    data: pe,
+                    borderColor: 'rgb(148, 39, 245)',
+                    backgroundColor: 'rgba(148, 39, 245, 0.5)',
                     skipNull: true,
                     type: 'line'
-                },
-                {
-                    label: 'Return on Assets (%)',
-                    data: roaa,
-                    borderColor: 'rgb(33, 29, 29)',
-                    backgroundColor: 'rgba(35, 29, 229, 0.7)',
-                    skipNull: true,
-                    type: 'line'
-                },
+                }
             ],
         };
 

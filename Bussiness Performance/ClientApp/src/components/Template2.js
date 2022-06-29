@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Statistic } from './statistics/Statistic';
 import { ROEA } from './charts/RoeRoaChart';
+import { PERatio } from './charts/PEChart';
 
 export class Template2 extends Component {
   static displayName = Template2.name;
@@ -18,6 +19,7 @@ export class Template2 extends Component {
             </div>
             <div className='row'>
                 <div className='col-md-12'>
+                    <PERatio/>
                 </div>
             </div>
             <div className='row'>
