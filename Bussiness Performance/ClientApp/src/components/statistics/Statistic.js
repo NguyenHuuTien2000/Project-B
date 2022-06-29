@@ -31,9 +31,9 @@ export class Statistic extends Component {
             <p><strong>Name</strong>:    {data.companyName}</p>
             <p><strong>Sector</strong>:  {data.sector}</p>
             <p><strong>Industry</strong>:    {data.industry}</p>
-            <p><strong>Total Revenue (B)</strong>:   {formatter.format(data.totalRevenue)}</p>
-            <p><strong>Total Expense (B)</strong>:  {formatter.format(data.totalExpense)}</p>
-            <p><strong>EPS</strong>: {formatter.format(data.eps)}</p>
+            <p><strong>Total Revenue (B)</strong>:   <span className='big-number'>{formatter.format(data.totalRevenue)}</span> </p>
+            <p><strong>Total Expense (B)</strong>: <span className='big-number'>{formatter.format(data.totalExpense)}</span> </p>
+            <p><strong>EPS</strong>: <span className='big-number'>{formatter.format(data.eps)}</span></p>
         </div>);
     } 
 

@@ -37,6 +37,11 @@ body {
     width: 79%;
 }
 
+.big-number {
+    font-size: large;
+    font-weight: 700;
+}
+
 .feather {
     width: 16px;
     height: 16px;

@@ -71,18 +71,20 @@ export class NavMenu extends Component {
                 <button className="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
+
                 <input 
                 className="form-control form-control-dark w-100" 
                 type="text" 
                 placeholder='Search for company name or code' 
                 onChange={(event) => this.handleFilter(event)}
                 value={this.state.wordEntered} />
+
                 <div className='search-box'>
                     {contents}
                 </div>
                 <div className="navbar-nav">
                     <div className="nav-item text-nowrap" >
-                        <button type='button' className="nav-link px-3" onClick={() => this.clearInput}>Clear</button>
+                        <button className="nav-link px-3 bg-dark" onClick={() => this.clearInput()}>Clear</button>
                     </div>
                 </div>
             </header>
