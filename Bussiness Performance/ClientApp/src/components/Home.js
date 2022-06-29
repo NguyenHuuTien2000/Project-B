@@ -47,17 +47,27 @@ export class Home extends Component {
                 </ul>
               </div>
             </nav>
-            <main className='col-md-9 ms-auto col-lg-10'>
+            <main className='col-md-10 ms-auto col-lg-10'>
               <div className='container m-0 p-0 w-100'>
                 <div className='row'>
                   <div className="col-md-9">
                       <ProfitMargin />
-                      <OperatingRevenue />
-                      <TotatDebt />
-                      <NetWorth />
                   </div>
                   <div className="col-md-3">
                       <Statistic />
+                  </div>
+                </div>
+                <div className='row'>
+                  <div className='col-md-12'>
+                      <NetWorth />
+                  </div>
+                </div>
+                <div className='row'>
+                  <div className='col-md-6'>
+                    <OperatingRevenue />
+                  </div>
+                  <div className='col-md-6'>
+                    <TotatDebt />
                   </div>
                 </div>
               </div>

@@ -45,9 +45,6 @@ export class NetWorth extends Component {
             liabilities.unshift(result.liabilities);
             netWorth.unshift(result.total_Assets - result.liabilities);
         }
-        console.log(assets);
-        console.log(liabilities);
-        console.log(netWorth);
         
         let companyName = `${results[0].companyID} - ${this.state.compName}`
 
