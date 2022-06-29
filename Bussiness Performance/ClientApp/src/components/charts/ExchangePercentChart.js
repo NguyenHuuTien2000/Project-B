@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import eventBus from '../ultilities/EventBus';
-import { Bar } from 'react-chartjs-2';
-import Chart from 'chart.js/auto';
+import { Line } from 'react-chartjs-2';
 
-export class OperatingRevenue extends Component {
-    static displayName = OperatingRevenue.name;
+export class ExchangePercent extends Component {
+    static displayName = ExchangePercent.name;
 
     constructor(props) {
         super(props);
@@ -19,7 +18,6 @@ export class OperatingRevenue extends Component {
 
     componentWillUnmount() {
         eventBus.remove("compSelected");
-        this.setState({ results: [], loading: 0, compName: ""});
     }
 
     renderChart(results) {
@@ -31,34 +29,36 @@ export class OperatingRevenue extends Component {
                 },
                 title: {
                     display: true,
-                    text: 'Financial Operating Revenue (VND)'
+                    text: 'Price Earning Ratio (%)'
                 },
             },
         };
 
         let labels = [];
-        let numList = [];
+        let pe = [];
         for (let result of results) {
             labels.unshift(result.time);
-            numList.unshift(result.financial_Operating_Revenue);
+            pe.unshift(result.marketPriceToEarningsIndex);
         }
+        
         let companyName = `${results[0].companyID} - ${this.state.compName}`
 
         let chartData = {
             labels,
             datasets: [
                 {
-                    label: 'Financial Operating Revenue (VND)',
-                    data: numList,
-                    borderColor: 'rgb(54, 162, 235)',
-                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    label: 'Price Earning Ratio',
+                    data: pe,
+                    borderColor: 'rgb(148, 39, 245)',
+                    backgroundColor: 'rgba(148, 39, 245, 0.5)',
                     skipNull: true,
-                },
+                    type: 'line'
+                }
             ],
         };
 
         return (
-            <Bar options={options} data={chartData} />
+            <Line options={options} data={chartData} />
         );
     }
 
@@ -76,14 +76,14 @@ export class OperatingRevenue extends Component {
         }
         
         return (
-            <div className="BarChart chart bg-light rounded m-1 p-2">
+            <div className="NetWorth chart bg-light rounded m-1 p-2">
                 {contents}
             </div>
         );
     }
 
     async getData(id, name) {
-        const response = await fetch(`api/BussinessResults/byID/${id}`);
+        const response = await fetch(`api/FinancialIndicators/byID/${id}`);
         const data = await response.json();
         if (Object.keys(data).length === 0 && data.constructor === Object) {
             this.setState({ loading: 2 });

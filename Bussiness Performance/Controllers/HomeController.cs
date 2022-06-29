@@ -71,5 +71,19 @@ namespace Bussiness_Performance.Controllers
             }
             return list;
         }
+
+        [HttpGet("{id}"), ActionName("BalanceSheetAccounting")]
+        public IEnumerable<double> GetBalanceSheetAC(string id)
+        {
+
+            var allCopany = _context.Company.ToList();
+            double total = allCopany.Count();
+            double hose = allCopany.Count(c => c.Exchange == "HOSE");
+            double hnx = allCopany.Count(c => c.Exchange == "HNX");
+            double upcom = allCopany.Count(c => c.Exchange == "UPCoM");
+
+            
+            return new double[] { hose / total, hnx / total, upcom / total };
+        }
     }
 }

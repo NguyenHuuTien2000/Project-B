@@ -13,19 +13,8 @@ export class Home extends Component {
     this.state = { temp : 1, ID : "", Name: ""};
   }
 
-  componentDidMount() {
-    eventBus.on("compSelected", (data) => {
-        this.setState({ ID: data.ID, Name: data.Name })
-    });
-  }
-
   selectTemplate(num) {
-    this.sendCompanyID(this.state.ID, this.state.Name)
     this.setState({temp: num});
-  }
-
-  sendCompanyID(id, name) {
-    eventBus.dispatch("compSelected", { ID: id, Name: name });
   }
     
   render () {

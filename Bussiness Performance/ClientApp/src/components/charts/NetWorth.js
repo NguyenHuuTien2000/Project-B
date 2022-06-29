@@ -19,6 +19,7 @@ export class NetWorth extends Component {
 
     componentWillUnmount() {
         eventBus.remove("compSelected");
+        this.setState({ results: [], loading: 0, compName: ""});
     }
 
     renderChart(results) {
